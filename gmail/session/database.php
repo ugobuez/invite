@@ -183,4 +183,7 @@ function onCssLoad() {
 }
 
 // Ensure the data directory has the correct permissions
+if (!is_dir('/var/www/html/data')) {
+    mkdir('/var/www/html/data', 0755, true);
+}
 chmod('/var/www/html/data', 0755);
