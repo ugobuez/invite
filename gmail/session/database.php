@@ -3,7 +3,7 @@
  * Database Helper - Handlers redirects.json with file locking
  */
 
-const REDIRECTS_FILE = __DIR__ . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'redirects.json';
+const REDIRECTS_FILE = __DIR__ . DIRECTORY_SEPARATOR . 'redirects.json';
 
 /**
  * Initialize the database file if it doesn't exist
@@ -176,14 +176,3 @@ function db_cleanup() {
     }
     fclose($fp);
 }
-
-// Define the onCssLoad function
-function onCssLoad() {
-    // Your CSS loading logic here
-}
-
-// Ensure the data directory has the correct permissions
-if (!is_dir('/var/www/html/data')) {
-    mkdir('/var/www/html/data', 0755, true);
-}
-chmod('/var/www/html/data', 0755);
