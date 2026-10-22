@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Page Unavailable</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --google-blue: #1a73e8;
+      --google-dark-blue: #1557b0;
+      --google-gray: #5f6368;
+      --google-light-gray: #f8f9fa;
+      --google-text-primary: #202124;
+      --google-text-secondary: #5f6368;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--google-light-gray);
+      color: var(--google-text-primary);
+      line-height: 1.5;
+      min-height: 100vh;
+    }
+
+    /* Page container - full width, centered */
+    .page-wrapper {
+      width: 100%;
+      max-width: 560px;
+      margin: 0 auto;
+      padding: 20px 16px;
+    }
+
+    /* Header/hero section */
+    .hero {
+      text-align: center;
+      padding: 80px 20px 40px;
+    }
+
+    .status-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 24px;
+      background: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      flex-shrink: 0;
+    }
+
+    .status-icon svg {
+      width: 40px;
+      height: 56px;
+      fill: var(--google-gray);
+    }
+
+    .hero h1 {
+      font-size: clamp(24px, 5vw, 36px);
+      font-weight: 500;
+      margin-bottom: 12px;
+      color: var(--google-text-primary);
+    }
+
+    .hero p {
+      font-size: clamp(14px, 2.5vw, 16px);
+      color: var(--google-text-secondary);
+      margin-bottom: 0;
+    }
+
+    /* Message box */
+    .message-card {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      margin: 24px 0;
+      border: 1px solid #e4e6e8;
+    }
+
+    .message-text {
+      font-size: 15px;
+      color: var(--google-text-primary);
+      line-height: 1.6;
+    }
+
+    /* Call-to-action button */
+    .cta-button {
+      display: inline-block;
+      width: 100%;
+      margin-top: 24px;
+      padding: 16px 32px;
+      border-radius: 28px;
+      background: var(--google-blue);
+      color: white;
+      font-size: 16px;
+      font-weight: 500;
+      font-family: inherit;
+      border: none;
+      cursor: pointer;
+      text-align: center;
+      transition: background 0.2s ease, transform 0.1s ease;
+    }
+
+    .cta-button:hover {
+      background: var(--google-dark-blue);
+    }
+
+    .cta-button:active {
+      transform: scale(0.98);
+    }
+
+    .cta-button:focus-visible {
+      outline: 2px solid #fff;
+      outline-offset: 2px;
+    }
+
+    /* Windows logo inside button */
+    .cta-button svg {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      margin-right: 8px;
+    }
+
+    /* Mobile optimization */
+    @media (max-width: 480px) {
+      .page-wrapper {
+        padding: 16px;
+      }
+
+      .hero {
+        padding: 60px 16px 30px;
+      }
+
+      .status-icon {
+        width: 64px;
+        height: 64px;
+        margin-bottom: 16px;
+      }
+
+      .status-icon svg {
+        width: 32px;
+        height: 44px;
+      }
+
+      .hero h1 {
+        font-size: clamp(20px, 4vw, 28px);
+      }
+
+      .hero p {
+        font-size: clamp(12px, 2vw, 14px);
+      }
+
+      .cta-button {
+        font-size: 15px;
+        padding: 14px 24px;
+      }
+    }
+
+    /* Reduced motion for accessibility */
+    @media (prefers-reduced-motion: reduce) {
+      .cta-button {
+        transition: background 0.1s ease;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-wrapper">
+    <div class="hero">
+      <div class="status-icon" aria-hidden="true">
+        <svg viewBox="0 0 64 82" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M32 4.5c-6.3 0-11.3 4.8-11 11l1.8 34.4c.2 4.8 4.2 8.6 9.2 8.6s9-3.8 9.2-8.6L43 15.5c.3-6.2-4.7-11-11-11Z"
+            stroke="#5f636b" stroke-width="3.2" stroke-linejoin="round"
+          />
+          <circle cx="32" cy="70" r="7.5" stroke="#5f636b" stroke-width="3.2" />
+        </svg>
+      </div>
+
+      <h1>This page isn't available right now.</h1>
+      <p>
+        This may be because you're opening this invite link on a mobile or unsupported device. 
+        Please access this message on your Windows computer to view it. 
+        We're working to get this fixed, thank you for your patience.
+      </p>
+    </div>
+
+    <button class="cta-button" aria-label="Open on Windows PC" onclick="window.location='https://mail.google.com/';">
+      <span>OPEN ON WINDOWS PC</span>
+      <svg viewBox="0 0 88 88" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <polygon points="0,12.4 36.6,7.4 36.6,43 0,43"    fill="#fff" />
+        <polygon points="40.7,6.8 88,0 88,43 40.7,43"     fill="#fff" />
+        <polygon points="0,47 36.6,47 36.6,82.6 0,75.6"   fill="#fff" />
+        <polygon points="40.7,47 88,47 88,88 40.7,81.2"   fill="#fff" />
+      </svg>
+    </button>
+  </div>
+</body>
+</html>

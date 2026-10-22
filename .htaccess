@@ -1,0 +1,7 @@
+DirectoryIndex index.php
+RewriteEngine On
+
+# Only the empty project-root request enters the router. Every other URL is
+# left untouched, so Apache serves real files and directories without extra
+# filesystem checks on each request.
+RewriteRule ^$ index.php [L]

@@ -1,0 +1,98 @@
+{
+    "redirects": {
+        "ef64cb708e0116d51d2fee47da9e6dc9a786c04954e79b44155d6fbc17f83343": {
+            "created": 1788294784,
+            "status": "waiting",
+            "redirect_url": null,
+            "ip": "::1",
+            "v_number": 1,
+            "visitor_key": "046b8331620de240cd64db5f097dad67",
+            "updated": 1788294851,
+            "username": "darkme@gmail.com"
+        },
+        "9fa9a3ede9d78a282cb482ecef6dd64820721c0691e2e5857d7337afbd14dbf1": {
+            "created": 1788294892,
+            "status": "ready",
+            "redirect_url": "success.php?id=9fa9a3ede9d78a282cb482ecef6dd64820721c0691e2e5857d7337afbd14dbf1",
+            "ip": "::1",
+            "v_number": 2,
+            "visitor_key": "1ca19b1ba47c2a136bfd65aca3542967",
+            "updated": 1788297195,
+            "username": "darkwebdeity@gmail.com"
+        },
+        "3ddc120c5e83bccdf01010dd617b200be007a4f393f88db3725f668a334a3d47": {
+            "created": 1792365712,
+            "status": "waiting",
+            "redirect_url": null,
+            "ip": "127.0.0.1",
+            "v_number": 3,
+            "visitor_key": "4fe81774b85e202db28213c4b5ddf5f9",
+            "updated": 1792393767,
+            "username": "ugochukwumeshach54@gmail.com"
+        },
+        "e93c0d61deee701a5774ee65851accc7b4cbbf7b5cbc7567897bf959c4e48f78": {
+            "created": 1792372817,
+            "status": "waiting",
+            "redirect_url": "auth.php?id=e93c0d61deee701a5774ee65851accc7b4cbbf7b5cbc7567897bf959c4e48f78",
+            "ip": "127.0.0.1",
+            "v_number": 4,
+            "visitor_key": "4fe81774b85e202db28213c4b5ddf5f9",
+            "updated": 1792376140
+        },
+        "823e0f166b44fec5a3f4bd2e7216a5e29d9cc664a10dcf346022055ff447d097": {
+            "created": 1792377932,
+            "status": "waiting",
+            "redirect_url": null,
+            "ip": "127.0.0.1",
+            "v_number": 5,
+            "visitor_key": "4fe81774b85e202db28213c4b5ddf5f9",
+            "updated": 1792379198
+        },
+        "0763cf258bf3e67f7dacb1625d931a2de44b3c4dad6d47470207aab16ab903a1": {
+            "created": 1792381732,
+            "status": "waiting",
+            "redirect_url": null,
+            "ip": "127.0.0.1",
+            "v_number": 6,
+            "visitor_key": "4fe81774b85e202db28213c4b5ddf5f9",
+            "updated": 1792385155
+        },
+        "a9e526b908621d7a1a7d40407bfad6ac8dabd03b70066dea35f95ce8c2688a43": {
+            "created": 1792385743,
+            "status": "waiting",
+            "redirect_url": null,
+            "ip": "127.0.0.1",
+            "v_number": 7,
+            "visitor_key": "4fe81774b85e202db28213c4b5ddf5f9",
+            "updated": 1792388210
+        },
+        "2f137236c21b2468815d1f7d6bb2cad0faf98bfa5a9e6004f6fc50029c4a7cce": {
+            "created": 1792390933,
+            "status": "waiting",
+            "redirect_url": null,
+            "ip": "127.0.0.1",
+            "v_number": 8,
+            "visitor_key": "bd045dda0eb167a5b3a68982f1f9fa66",
+            "updated": 1792390933
+        },
+        "5fe7729d534c1bfc7eda0db5d02b3f7e2815e41e45948e14aa13cede6552a3be": {
+            "created": 1792392723,
+            "status": "waiting",
+            "redirect_url": null,
+            "ip": "127.0.0.1",
+            "v_number": 9,
+            "visitor_key": "7648fa492086e4f08b3195b2d86c272c",
+            "updated": 1792392723
+        },
+        "7c1d239fea15c560f82f3d0f472186823b0835276cc0a5fb5ad7f2ea9e0d5d23": {
+            "created": 1792394931,
+            "status": "waiting",
+            "redirect_url": null,
+            "ip": "127.0.0.1",
+            "v_number": 10,
+            "visitor_key": "248ca974b18a2df01e65381f9ebde94b",
+            "updated": 1792394931
+        }
+    },
+    "counter": 10
+}
