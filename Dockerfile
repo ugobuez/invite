@@ -1,3 +1,4 @@
+# Use the official PHP Apache image
 FROM php:8.3-apache
 
 # Enable Apache rewrite module and configure ports
