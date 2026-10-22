@@ -1,0 +1,9 @@
+@'
+.git
+.env
+.env.*
+!.env.example
+*.log
+**/session/tmp/
+**/sess_*
+'@ | Set-Content -Path .\.dockerignore -Encoding ascii
