@@ -15,14 +15,14 @@ ENV APACHE_RUN_DIR=/tmp/apache2/run
 ENV APACHE_PID_FILE=/tmp/apache2/run/apache2.pid
 ENV APACHE_LOCK_DIR=/tmp/apache2/lock
 
-# Copy source code and entrypoint script
+# Copy source code
 COPY . /var/www/html/
-COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 
-# Set permissions and make entrypoint executable
-RUN chown -R www-data:www-data /var/www/html \
-    && chmod +x /usr/local/bin/entrypoint.sh
+RUN chown -R www-data:www-data /var/www/html
 
-# Use entrypoint to bind Apache to the runtime PORT
-ENTRYPOINT ["entrypoint.sh"]
-CMD ["apache2-foreground"]
+EXPOSE 10000
+
+# Dynamically update Apache to listen on Hostless's assigned runtime PORT at boot
+CMD sed -i "s/Listen [0-9]*/Listen ${PORT:-80}/g" /etc/apache2/ports.conf \
+    && sed -i "s/:[0-9]*>/:${PORT:-80}>/g" /etc/apache2/sites-available/000-default.conf \
+    && apache2-foreground
