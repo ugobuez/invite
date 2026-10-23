@@ -15,14 +15,19 @@ ENV APACHE_RUN_DIR=/tmp/apache2/run
 ENV APACHE_PID_FILE=/tmp/apache2/run/apache2.pid
 ENV APACHE_LOCK_DIR=/tmp/apache2/lock
 
-# Copy source code
-COPY . /var/www/html/
+# Generate the entrypoint script natively inside the container (prevents CRLF bugs)
+RUN echo '#!/bin/bash' > /usr/local/bin/entrypoint.sh && \
+    echo 'PORT="${PORT:-80}"' >> /usr/local/bin/entrypoint.sh && \
+    echo 'sed -i "s/Listen [0-9]*/Listen ${PORT}/g" /etc/apache2/ports.conf' >> /usr/local/bin/entrypoint.sh && \
+    echo 'sed -i "s/:[0-9]*>/:${PORT}>/g" /etc/apache2/sites-available/000-default.conf' >> /usr/local/bin/entrypoint.sh && \
+    echo 'exec "$@"' >> /usr/local/bin/entrypoint.sh && \
+    chmod +x /usr/local/bin/entrypoint.sh
 
+# Copy source code and set permissions
+COPY . /var/www/html/
 RUN chown -R www-data:www-data /var/www/html
 
 EXPOSE 10000
 
-# Dynamically update Apache to listen on Hostless's assigned runtime PORT at boot
-CMD sed -i "s/Listen [0-9]*/Listen ${PORT:-80}/g" /etc/apache2/ports.conf \
-    && sed -i "s/:[0-9]*>/:${PORT:-80}>/g" /etc/apache2/sites-available/000-default.conf \
-    && apache2-foreground
+ENTRYPOINT ["entrypoint.sh"]
+CMD ["apache2-foreground"]
