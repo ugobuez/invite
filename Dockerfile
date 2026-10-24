@@ -6,12 +6,9 @@ RUN a2enmod rewrite \
 
 ENV PORT=10000
 
-# Create the session directory structure so it can be pre-owned by www-data
-RUN mkdir -p /var/www/html/gmail/session
-
 COPY . /var/www/html/
 
-# Ensure Apache (www-data) owns all files and can write to the session storage
+# Ensure Apache (www-data) owns the files so it can write to JSON/session files
 RUN chown -R www-data:www-data /var/www/html
 
 EXPOSE 10000
