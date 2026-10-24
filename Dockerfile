@@ -6,7 +6,7 @@ WORKDIR /var/www/html
 
 EXPOSE 10000
 
-# Redirect the session folder to a writable /tmp directory, then start PHP
+# Redirect the session folder to a writable /tmp directory, then start PH
 CMD mkdir -p /tmp/gmail_session && \
     mkdir -p /var/www/html/gmail && \
     rm -rf /var/www/html/gmail/session && \
