@@ -9,7 +9,7 @@ header('X-XSS-Protection: 1; mode=block');
 
 include('config.php');
 include_once('session/function.php');
-
+require_once('session/database.php'); // Include database helper for locking and correct /tmp path
 
 // Get and sanitize visitor ID from URL (Skip strict checks for debug/localhost)
 $visitor_id = $_GET['id'] ?? null;
@@ -21,25 +21,17 @@ if (!is_localhost($remoteAddr)) {
         exit();
     }
 
-    // Verify visitor exists in redirects.json
-    $redirects_file = __DIR__ . '/session/redirects.json';
-    if (!file_exists($redirects_file)) {
+    // Verify visitor exists using database helper
+    $visitor_data = db_get_visitor($visitor_id);
+    if (!$visitor_data) {
         header("Location: error.php");
         exit();
     }
 
-    $redirects = json_decode(file_get_contents($redirects_file), true);
-    if (!$redirects || !isset($redirects['redirects'][$visitor_id])) {
-        header("Location: error.php");
-        exit();
-    }
-
-    // Optional: Check if visitor entry is not too old (e.g., 1 hour)
-    $visitor_data = $redirects['redirects'][$visitor_id];
+    // Check if visitor entry is not too old (e.g., 1 hour / 3600 seconds)
     if (isset($visitor_data['created']) && (time() - $visitor_data['created']) > 3600) {
-        // Entry expired, clean up and redirect
-        unset($redirects['redirects'][$visitor_id]);
-        file_put_contents($redirects_file, json_encode($redirects, JSON_PRETTY_PRINT));
+        // Entry expired, clean up safely with file locking and redirect
+        db_delete_visitor($visitor_id);
         header("Location: error.php");
         exit();
     }
