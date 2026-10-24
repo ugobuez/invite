@@ -1,7 +1,9 @@
 FROM php:8.3-apache
 
-# Enable required modules during the build phase (where the file system is writable)
-RUN a2enmod rewrite headers
+# Enable required modules during the build phase
+RUN a2enmod rewrite headers \
+    && mkdir -p /tmp/apache2/run /tmp/apache2/lock \
+    && chmod 777 /tmp/apache2/run /tmp/apache2/lock
 
 # Copy your PHP application files
 COPY . /var/www/html/
@@ -9,10 +11,9 @@ RUN chown -R www-data:www-data /var/www/html
 
 EXPOSE 10000
 
-# At runtime, generate a writable Apache config in /tmp using the dynamic PORT
+# At runtime, generate a clean writable Apache config in /tmp using the dynamic PORT
 CMD PORT="${PORT:-10000}" && \
     printf "ServerName localhost\n" > /tmp/apache.conf && \
-    printf "Mutex file:/tmp apache\n" >> /tmp/apache.conf && \
     printf "PidFile /tmp/apache2.pid\n" >> /tmp/apache.conf && \
     printf "User root\n" >> /tmp/apache.conf && \
     printf "Group root\n" >> /tmp/apache.conf && \
