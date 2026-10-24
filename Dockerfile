@@ -4,6 +4,13 @@ RUN a2enmod rewrite \
     && sed -i 's/Listen 80/Listen 10000/' /etc/apache2/ports.conf \
     && sed -i 's/:80>/:10000>/' /etc/apache2/sites-available/000-default.conf
 
+# Allow .htaccess overrides for URL rewriting / routing
+RUN echo '<Directory /var/www/html/>\n\
+    Options Indexes FollowSymLinks\n\
+    AllowOverride All\n\
+    Require all granted\n\
+    </Directory>' >> /etc/apache2/apache2.conf
+
 ENV PORT=10000
 
 COPY . /var/www/html/
