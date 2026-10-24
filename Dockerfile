@@ -1,28 +1,22 @@
 FROM php:8.3-apache
 
-RUN a2enmod rewrite \
-    && sed -i 's/Listen 80/Listen 10000/' /etc/apache2/ports.conf \
-    && sed -i 's/:80>/:10000>/' /etc/apache2/sites-available/000-default.conf
-
-# Allow .htaccess overrides for URL rewriting / routing
-RUN echo '<Directory /var/www/html/>\n\
-    Options Indexes FollowSymLinks\n\
-    AllowOverride All\n\
-    Require all granted\n\
-    </Directory>' >> /etc/apache2/apache2.conf
-
-ENV PORT=10000
-
+# Copy your PHP application files into the web root
 COPY . /var/www/html/
+WORKDIR /var/www/html
 
-# 1. Patch database.php at build time to use writable /tmp storag
-# 2. Ensure /tmp/gmail_session is created and permissions are open
-# 3. Set ownership for www-data
+# Permanently patch database.php during build to use the writable /tmp folder
 RUN sed -i "s|const REDIRECTS_FILE =.*;|const REDIRECTS_FILE = '/tmp/gmail_session/redirects.json';|g" /var/www/html/gmail/session/database.php \
     && mkdir -p /tmp/gmail_session \
-    && chmod 777 /tmp/gmail_session \
-    && chown -R www-data:www-data /var/www/html
+    && chmod 777 /tmp/gmail_session
+
+# Generate a startup script that correctly binds to Hostless's dynamic PORT
+RUN echo '#!/bin/sh' > /usr/local/bin/start.sh && \
+    echo 'mkdir -p /tmp/gmail_session' >> /usr/local/bin/start.sh && \
+    echo 'chmod 777 /tmp/gmail_session' >> /usr/local/bin/start.sh && \
+    echo 'exec php -S 0.0.0.0:${PORT:-10000}' >> /usr/local/bin/start.sh && \
+    chmod +x /usr/local/bin/start.sh
 
 EXPOSE 10000
 
-CMD ["apache2-foreground"]
+# Run the startup script
+CMD ["/usr/local/bin/start.sh"]

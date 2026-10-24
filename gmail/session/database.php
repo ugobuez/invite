@@ -157,7 +157,6 @@ function db_cleanup() {
         
         if (isset($db['redirects'])) {
             foreach ($db['redirects'] as $id => $data) {
-                // Fixed broken subtraction operator across lines
                 if (isset($data['updated']) && ($now - $data['updated']) > 7200) {
                     unset($db['redirects'][$id]);
                     $changed = true;
