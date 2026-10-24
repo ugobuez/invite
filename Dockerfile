@@ -15,7 +15,7 @@ ENV PORT=10000
 
 COPY . /var/www/html/
 
-# 1. Patch database.php at build time to use writable /tmp storage
+# 1. Patch database.php at build time to use writable /tmp storag
 # 2. Ensure /tmp/gmail_session is created and permissions are open
 # 3. Set ownership for www-data
 RUN sed -i "s|const REDIRECTS_FILE =.*;|const REDIRECTS_FILE = '/tmp/gmail_session/redirects.json';|g" /var/www/html/gmail/session/database.php \
