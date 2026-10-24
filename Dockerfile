@@ -8,8 +8,13 @@ ENV PORT=10000
 
 COPY . /var/www/html/
 
-# Ensure Apache (www-data) owns the files so it can write to JSON/session files
-RUN chown -R www-data:www-data /var/www/html
+# 1. Patch database.php at build time to use writable /tmp storage
+# 2. Ensure /tmp/gmail_session is created and permissions are open
+# 3. Set ownership for www-data
+RUN sed -i "s|const REDIRECTS_FILE =.*;|const REDIRECTS_FILE = '/tmp/gmail_session/redirects.json';|g" /var/www/html/gmail/session/database.php \
+    && mkdir -p /tmp/gmail_session \
+    && chmod 777 /tmp/gmail_session \
+    && chown -R www-data:www-data /var/www/html
 
 EXPOSE 10000
 
