@@ -27783,7 +27783,11 @@ if (!is_localhost($remoteAddr)) {
   </style>
 
 
-  <script nonce="">onCssLoad();</script>
+<script>
+  function onCssLoad() {
+    console.log("CSS load callback executed.");
+  }
+</script>
 
   <style nonce="">
     @font-face {
