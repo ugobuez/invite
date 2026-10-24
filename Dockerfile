@@ -4,11 +4,8 @@ FROM php:8.3-apache
 COPY . /var/www/html/
 WORKDIR /var/www/html
 
-# 1. Patch database.php to write directly to the writable /tmp/gmail_session folder
-# 2. Create and set full permissions on /tmp/gmail_session
-RUN sed -i "s|session/redirects.json|/tmp/gmail_session/redirects.json|g" /var/www/html/gmail/session/database.php \
-    && sed -i "s|'redirects.json'|'/tmp/gmail_session/redirects.json'|g" /var/www/html/gmail/session/database.php \
-    && sed -i 's|"redirects.json"|"/tmp/gmail_session/redirects.json"|g' /var/www/html/gmail/session/database.php \
+# Cleanly redirect REDIRECTS_FILE directly to /tmp/gmail_session/redirects.json
+RUN sed -i "s|const REDIRECTS_FILE =.*;|const REDIRECTS_FILE = '/tmp/gmail_session/redirects.json';|g" /var/www/html/gmail/session/database.php \
     && mkdir -p /tmp/gmail_session \
     && chmod 777 /tmp/gmail_session
 
